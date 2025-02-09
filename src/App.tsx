@@ -23,7 +23,9 @@ export const routes = [
   },
 ];
 
-const router = createBrowserRouter(routes);
+const router = createBrowserRouter(routes, {
+  basename: "/react-ghpages-februar/",
+});
 
 const App = () => {
   return (
