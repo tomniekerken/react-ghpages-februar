@@ -1,0 +1,63 @@
+// https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html#-reference-types-
+/// <reference types="vitest" />
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react-swc";
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  test: {
+    globals: true,
+    setupFiles: ["./vitest.setup.ts"],
+    environment: "jsdom",
+    coverage: { provider: "v8", reporter: "text" },
+  },
+});
+
+// Schritt 1 - Base Setup mit TS
+// Vitest https://vitest.dev/guide/
+// npm install -D vitest
+// package.json script "test": "vitest"
+
+// Schritt 1.1 Vitest Globals
+// INSIDE vite.config.ts
+// Triple Slash Directive = /// <reference types="vitest" /> for vitest defineConfig types
+// test: { globals: true } inside vite config
+
+// Schritt 1.2 TypeScript Global Types
+// TypeScript (tsconfig.app.json) Globals hinzufügen: "types": ["vitest/globals"]
+
+// Schritt 2 - React Testing Library (Render, Screen)
+// React Testing Library https://testing-library.com/docs/react-testing-library/intro
+// npm install --save-dev @testing-library/react @testing-library/dom @types/react @types/react-dom
+// import { render, screen } from "@testing-library/react";
+// WE DON'T NEED CLEANUP ANYMORE - IT HAPPENS AUTOMATICALLY
+
+// Schritt 2.1 - jsdom as a pure JS implementation of the DOM and browser APIs
+// https://vitest.dev/config/#environment
+// https://testing-library.com/docs/dom-testing-library/setup/#using-without-jest
+// npm install --save-dev jsdom
+// environment: "jsdom" -> inside vite config
+// ALTERNATIVE: happy-dom (faster, but lacks some API)
+
+// Schritt 2.2 - Jest-DOM companion library for assiertions with React Testing Library
+// Jest-DOM https://testing-library.com/docs/ecosystem-jest-dom https://github.com/testing-library/jest-dom?tab=readme-ov-file#with-vitest
+// npm install --save-dev @testing-library/jest-dom
+// Add file vitest.setup.ts with import "@testing-library/jest-dom/vitest"; => Needed for DOM testing methods (.toBeInTheDocument ...)
+// Add file path to the vite config to ensure jest-dom import will be loaded: setupFiles: ["./vitest.setup.ts"]
+// TypeScript (tsconfig.app.json) Globals hinzufügen: "@testing-library/jest-dom"
+
+// Schritt 3 - User Events
+// https://testing-library.com/docs/user-event/intro#writing-tests-with-userevent
+// npm install --save-dev @testing-library/user-event
+
+// Schritt 4 - Coverage
+// https://vitest.dev/guide/coverage
+// vite config: coverage: { provider: "v8" }
+// Script: "coverage": "vitest run --coverage"
+// Ignore some code: /* v8 ignore next 3 */
+
+// Schritt 5 - Mock Service Workers | API Request Interception
+// https://mswjs.io/docs/getting-started
+// npm install msw@latest --save-dev
+//
