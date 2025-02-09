@@ -64,7 +64,7 @@ export default defineConfig({
 // Adjust vitest.setup.ts to start msw before tests
 
 // Schritt 6 - Github Workflow & Pages
-// GitHub Repository Settings -> Actions, General -> Workflow Permissions: Read and write permissions
+// GitHub Repository Settings -> Actions, General -> Workflow Permissions: Read and write permissions | Deploy rom GitHub Actions
 // Make Repository Public
 // Actions -> Node.js Continous Integration COPY & PASTE (.github/workflows/node.js.yml), Remove node-version below 22.x
 // Push to repo, will run the workflow
