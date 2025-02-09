@@ -5,6 +5,7 @@ import react from "@vitejs/plugin-react-swc";
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: "/react-ghpages-februar",
   plugins: [react()],
   test: {
     globals: true,
@@ -60,4 +61,20 @@ export default defineConfig({
 // Schritt 5 - Mock Service Workers | API Request Interception
 // https://mswjs.io/docs/getting-started
 // npm install msw@latest --save-dev
-//
+// Adjust vitest.setup.ts to start msw before tests
+
+// Schritt 6 - Github Workflow & Pages
+// GitHub Repository Settings -> Actions, General -> Workflow Permissions: Read and write permissions
+// Make Repository Public
+// Actions -> Node.js Continous Integration COPY & PASTE (.github/workflows/node.js.yml), Remove node-version below 22.x
+// Push to repo, will run the workflow
+
+// Add gh pages part to the yml file
+// Explain actions from the marketplace: https://github.com/marketplace
+// Setup all necessary steps inside node.js.yml
+
+// Configure vite.config.ts
+// configure base as repository name base: "/react-ghpages-februar"
+// Configure package.json
+// adjust repository name
+// add "homepage": "<github>/<repository_name>/"
